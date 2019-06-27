@@ -9,7 +9,9 @@ const PostSchema = new mongoose.Schema({
    likes: {
       type: Number,
       default: 0
-   }
+   },
+   url: String, //AWS
+   key: String //pegar o HASH da imagem
 },
    { timestamps: true })
 
