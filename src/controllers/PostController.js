@@ -15,7 +15,7 @@ module.exports = {
         const { filename: image } = req.file
 
         const [name] = image.split('.')
-        const [hash] = image.split('-',2)
+        const [hash] = image.split('-', 2)
         const fileName = `${name}.jpg`
 
         //redimensionando imagem postada
