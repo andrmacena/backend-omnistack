@@ -12,8 +12,8 @@ const storageTypes = {
          crypto.randomBytes(16, (err, hash) => {
             if (err) callback(err)
 
-            const fileName = `${hash.toString('hex')}-${file.originalname}`
-            callback(null, fileName)
+            file.key = `${hash.toString('hex')}-${file.originalname}`
+            callback(null, file.key)
          })
       }
    }),
@@ -35,5 +35,5 @@ const storageTypes = {
 }
 
 module.exports = {
-    storage: storageTypes["local"]
+    storage: storageTypes["s3"]
 }
