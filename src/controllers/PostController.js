@@ -12,10 +12,9 @@ module.exports = {
 
     async store(req, res) {
         const { author, place, description, hashtag } = req.body
-        const { filename: image } = req.file
+        const { key, originalname } = req.file
 
-        const [name] = image.split('.')
-        const [hash] = image.split('-', 2)
+        const [name] = originalname.split('.')
         const fileName = `${name}.jpg`
 
         //redimensionando imagem postada
@@ -34,7 +33,7 @@ module.exports = {
             hashtag,
             image: fileName,
             url: '',
-            key: hash
+            key
         })
 
         req.io.emit('post', post)
