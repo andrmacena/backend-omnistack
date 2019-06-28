@@ -24,8 +24,8 @@ app.use((req, res, next) => {
 })
 
 app.use(cors())
-//express.static(path.resolve(__dirname, '..', 'uploads', 'resized')
-app.use('/files', 'https://backend-semanaomnistack.herokuapp.com')
+
+app.use('/files', express.static(path.resolve(__dirname, '..', 'uploads', 'resized')))
 
 app.use(require('./routes'))
 
