@@ -45,7 +45,7 @@ module.exports = {
 
         await post.remove()
 
-        return res.send('Excluido')
+        return res.send()
 
     }
 }
