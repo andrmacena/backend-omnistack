@@ -12,7 +12,7 @@ module.exports = {
 
     async store(req, res) {
         const { author, place, description, hashtag } = req.body
-        const { key, originalname, location: url = ''} = req.file
+        const { key, originalname, location: url = '' } = req.file
 
         const [name] = originalname.split('.')
         const fileName = `${name}.jpg`
@@ -39,6 +39,13 @@ module.exports = {
         req.io.emit('post', post)
 
         return res.json(post)
+    },
+    async delete(req, res) {
+        const post = await Post.findById(req.params.id)
+
+        await post.remove()
+
+        return res.send('Excluido')
 
     }
 }
