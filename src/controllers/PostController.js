@@ -12,19 +12,19 @@ module.exports = {
 
     async store(req, res) {
         const { author, place, description, hashtag } = req.body
-        const { key, originalname } = req.file
+        const { key, originalname, location: url = ''} = req.file
 
         const [name] = originalname.split('.')
         const fileName = `${name}.jpg`
 
-        //redimensionando imagem postada
+        /*//redimensionando imagem postada
         await sharp(req.file.path)
             .resize(500)
             .jpeg({ quality: 70 })
             .toFile(path.resolve(req.file.destination, 'resized', fileName))
 
         //excluindo imagem original
-        fs.unlinkSync(req.file.path)
+        fs.unlinkSync(req.file.path)*/
 
         const post = await Post.create({
             author,
@@ -32,11 +32,11 @@ module.exports = {
             description,
             hashtag,
             image: fileName,
-            url: '',
+            url,
             key
         })
 
-        req.io.emit('post', post)
+        //req.io.emit('post', post)
 
         return res.json(post)
 
