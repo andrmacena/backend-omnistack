@@ -3,7 +3,10 @@ const sharp = require('sharp')
 const path = require('path')
 const fs = require('fs')//file system
 
+
 module.exports = {
+
+
     async index(req, res) {
         const posts = await Post.find().sort('-createdAt')
 
@@ -14,6 +17,8 @@ module.exports = {
         const { author, place, description, hashtag } = req.body
         const { key, originalname, location: url = '' } = req.file
 
+        const juntar = key.split(' ').join('')
+
         const [name] = originalname.split('.')
         const fileName = `${name}.jpg`
 
@@ -22,7 +27,7 @@ module.exports = {
             .resize(500)
             .jpeg({ quality: 70 })
             .toFile(path.resolve(req.file.destination, 'resized', fileName))
-
+    
         //excluindo imagem original
         fs.unlinkSync(req.file.path)*/
 
@@ -33,7 +38,7 @@ module.exports = {
             hashtag,
             image: fileName,
             url,
-            key
+            key: juntar
         })
 
         req.io.emit('post', post)
