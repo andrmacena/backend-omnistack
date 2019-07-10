@@ -3,9 +3,7 @@ const sharp = require('sharp')
 const path = require('path')
 const fs = require('fs')//file system
 
-
 module.exports = {
-
 
     async index(req, res) {
         const posts = await Post.find().sort('-createdAt')
@@ -29,7 +27,7 @@ module.exports = {
             .toFile(path.resolve(req.file.destination, 'resized', fileName))
     
         //excluindo imagem original
-        fs.unlinkSync(req.file.path)*/ 
+        fs.unlinkSync(req.file.path)*/
 
         const post = await Post.create({
             author,
@@ -52,5 +50,19 @@ module.exports = {
 
         return res.send()
 
+    },
+    async update(req, res) {
+        const post = await Post.findById(req.params.id)
+
+        const { author, place, description, hashtag } = req.body
+
+        await post.update({
+            author,
+            place,
+            description,
+            hashtag,
+        })
+
+        return res.json(post)
     }
 }
