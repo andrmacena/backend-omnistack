@@ -50,19 +50,5 @@ module.exports = {
 
         return res.send()
 
-    },
-    async update(req, res) {
-        const post = await Post.findById(req.params.id)
-
-        const { author, place, description, hashtag } = req.body
-
-        await post.update({
-            author,
-            place,
-            description,
-            hashtag,
-        })
-
-        return res.json(post)
     }
 }
